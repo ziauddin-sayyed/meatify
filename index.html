@@ -29,7 +29,101 @@
     <link rel="stylesheet" href="assets/css/main.css" />
 
 </head>
+<style> 
 
+    .best-sellers {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #333;
+        position: relative;
+    }
+
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 3px;
+        background: #ff6b6b;
+        margin: 10px auto;
+    }
+
+    .products-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .product-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 250px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .product-info {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .product-name {
+        font-size: 1.1rem;
+        margin: 10px 0;
+        color: #333;
+    }
+
+    .product-price {
+        font-weight: bold;
+        color: #ff6b6b;
+        margin-bottom: 15px;
+    }
+
+    .add-to-cart {
+        background: #ff6b6b;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .add-to-cart:hover {
+        background: #ff5252;
+    }
+
+    .best-seller-tag {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #ff6b6b;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+</style>
 <body>
     <!--[if lte IE 9]>
       <p class="browserupgrade">
@@ -131,7 +225,7 @@
             </div>
             <div class="col-lg-7 col-md-12 col-12">
                 <div class="hero-image wow fadeInRight" data-wow-delay=".4s">
-                    <img src="assets/images/hero/phone.png" alt="Meatify - Meat Delivery App">
+                    <img src="assets/images/hero/phone1.png" alt="Meatify - Meat Delivery App">
                 </div>
             </div>
         </div>
@@ -295,7 +389,71 @@
         </div>
     </div>
 </section> -->
-<!-- End Pricing Table Area -->
+<!-- End Pricing Table Area --> 
+   
+    <section class="best-sellers">
+        <h2 class="section-title">Best Sellers</h2>
+        <div class="products-container">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="best-seller-tag">BEST SELLER</div>
+                <img src="./assets/images/Chicken Breast Boneless.jpg" alt="Product 1" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Chicken Breast Boneless</h3>
+                    <p class="product-price">₹230</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="best-seller-tag">BEST SELLER</div>
+                <img src="./assets/images/Goat_Curry_cut.png" alt="Product 2" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Goat Curry cut</h3>
+                    <p class="product-price">₹405</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="best-seller-tag">BEST SELLER</div>
+                <img src="./assets/images/Chicken_Curry_Cut.png" alt="Product 3" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Chicken Curry Cut Skinless
+                    </h3>
+                    <p class="product-price">₹145</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="best-seller-tag">BEST SELLER</div>
+                <img src="./assets/images/Premium_Goat_Keema.jpg" alt="Product 4" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Premium Goat Mince / Keema
+                    </h3>
+                    <p class="product-price">₹495</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="best-seller-tag">BEST SELLER</div>
+                <img src="./assets/images/chicken_kheema.png" alt="Product 4" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Chicken Kheema
+                    </h3>
+                    <p class="product-price">₹255</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section> 
+
 
 <!-- Start Call To Action Area -->
 <section class="section call-action">
