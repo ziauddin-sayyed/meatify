@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shipping & Delivery Policy - Meatify</title>
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <link rel="stylesheet" href="assets/css/tiny-slider.css" />
+    <link rel="stylesheet" href="assets/css/glightbox.min.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <!-- <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 1.5rem;
+      background-color: #ffffff;
+      color: #333;
+      line-height: 1.6;
+    }
+    h1, h2 {
+      color: #e53935;
+    }
+    a {
+      color: #e53935;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
+      }
+    }
+  </style> -->
+
+    <style>
+        .contact-hero {
+            background-color: #760000;
+            padding-top: 130px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(140, 34, 60, 0.1);
+        }
+
+        .contact-title {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .contact-subtitle {
+            color: white;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <header class="header navbar-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="nav-inner">
+                        <!-- Start Navbar -->
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="assets/images/logo/logo.png" height="100" style="width: 100%  !important;"
+                                    alt="Logo">
+                            </a>
+                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ms-auto">
+                                    <li class="nav-item">
+                                        <a href="index.html" class=" active" aria-label="Toggle navigation">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="About-Us.html" class="" aria-label="Toggle navigation">About Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="shipping-and-delivery.html" aria-label="Toggle navigation">Shipping &
+                                            Delivery</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="terms-and-conditions.html" class=""
+                                            aria-label="Toggle navigation">Terms & Conditions</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="contact-us.html" aria-label="Toggle navigation">Contact Us</a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                      <a class="dd-menu collapsed" href="coming-soon.html" data-bs-toggle="collapse"
+                                          data-bs-target="#submenu-1-4" aria-controls="navbarSupportedContent"
+                                          aria-expanded="false" aria-label="Toggle navigation">Blog</a>
+                                      <ul class="sub-menu collapse" id="submenu-1-4">
+                                          <li class="nav-item"><a href="coming-soon.html">Blog Grid Sidebar</a>
+                                          </li>
+                                          <li class="nav-item"><a href="coming-soon.html">Blog Single</a></li>
+                                          <li class="nav-item"><a href="coming-soon.html">Blog Single
+                                                  Sibebar</a></li>
+                                      </ul>
+                                  </li> -->
+
+                                </ul>
+                            </div> <!-- navbar collapse -->
+                            <div class="button add-list-button">
+                                <a href="coming-soon.html" class="btn">Get it now</a>
+                            </div>
+                        </nav>
+                        <!-- End Navbar -->
+                    </div>
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </header> 
+    <section style="padding-top: 130px;" class="contact-hero text-center">
+        <div class="container">
+            <h1 class="contact-title">Products</h1>
+            <!-- <p class="contact-subtitle"><strong>Effective Date:</strong> June 16, 2025</p> -->
+        </div>
+    </section> 
+
+
+
+  <div class="container py-4">
+    <!-- Filters -->
+    <div class="row mb-4" id="filters">
+      <div class="col-md-4">
+        <label for="categoryFilter" class="form-label">Category</label>
+        <select id="categoryFilter" class="form-select">
+          <option value="">All</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="priceFilter" class="form-label">Max Price</label>
+        <input type="number" id="priceFilter" class="form-control" placeholder="Max price">
+      </div>
+      <div class="col-md-4" id="attributeFilters">
+        <!-- Attributes will be injected here -->
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="row" id="productGrid">
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- /End Preloader -->
+    </div>
+  </div>
+
+  <script>
+    const graphqlEndpoint = 'https://api.meatify.in/graphql/'; // Replace with your Saleor instance
+
+    const query = `
+
+  query GetProducts {
+    products(first: 100, channel: "in") {
+      edges {
+        node {
+          id
+          name
+          slug
+          description
+          seoTitle
+          seoDescription
+          thumbnail(size: 1024, format: WEBP) {
+            url
+            alt
+          }
+          media {
+            id
+            url
+            alt
+          }
+          category {
+            id
+            name
+          }
+          productType {
+            id
+            name
+            hasVariants
+            isShippingRequired
+          }
+          attributes {
+            attribute {
+              id
+              name
+              slug
+            }
+            values {
+              id
+              name
+              slug
+              value
+              file {
+                url
+                contentType
+              }
+              richText
+              reference
+              boolean
+              date
+              dateTime
+            }
+          }
+          variants {
+            ...VariantFragment
+            quantityAvailable
+            media {
+              url
+              alt
+            }
+            attributes {
+              attribute {
+                id
+                name
+                slug
+              }
+              values {
+                id
+                name
+                value
+              }
+            }
+          }
+          pricing {
+            priceRange {
+              start {
+                gross {
+                  amount
+                  currency
+                }
+              }
+              stop {
+                gross {
+                  amount
+                  currency
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  fragment VariantFragment on ProductVariant {
+    id
+    name
+    sku
+    pricing {
+      price {
+        gross {
+          amount
+          currency
+        }
+      }
+    }
+  }
+    
+
+    `;
+
+    async function fetchProducts() {
+      const res = await fetch(graphqlEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+      const json = await res.json();
+      return json.data.products.edges.map(e => e.node);
+    }
+
+    function renderProducts(products) {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+
+      products.forEach(product => {
+        const price = product.pricing?.priceRange?.start?.gross?.amount;
+        const currency = product.pricing?.priceRange?.start?.gross?.currency || '';
+        // const parsedDescription = product.description.blocks ? JSON.parse(product.description.blocks) : {};
+
+        const parsedDescription = JSON.parse(product.description)?.blocks?.[0]?.data?.text || {};
+        console.log(parsedDescription);
+        const variant = product.variants?.[0];
+const variantName = variant?.name || '';
+const netWeight = product.attributes?.find(attr => attr.attribute.slug === "net-weight")
+                  ?.values?.[0]?.name || variant?.attributes?.find(attr => attr.attribute.slug === "net-weight")
+                  ?.values?.[0]?.name || '';
+
+        const quantityLabel = variantName || netWeight || '';
+        const card = document.createElement('div');
+        card.className = 'col-md-4 mb-4';
+        card.innerHTML = `
+            <div class="card h-100 shadow-sm">
+            <img src="${product.thumbnail?.url}" class="card-img-top" alt="${product.thumbnail?.alt || product.name}">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text">${parsedDescription?.slice(0, 100) || ''}</p>
+                ${quantityLabel ? `<p class="mt-auto text-muted mb-1">${quantityLabel}</p>` : ''}
+                <p class="fw-bold mt-auto">${price ? `₹${price}` : 'N/A'}</p>
+            </div>
+            </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function setupFilters(products) {
+      const categorySelect = document.getElementById('categoryFilter');
+      const priceInput = document.getElementById('priceFilter');
+      const attributeFilters = document.getElementById('attributeFilters');
+
+      const categories = [...new Set(products.map(p => p.category?.name).filter(Boolean))];
+      categories.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat;
+        option.textContent = cat;
+        categorySelect.appendChild(option);
+      });
+
+      const attributesMap = new Map();
+      products.forEach(p => {
+        p.attributes.forEach(attr => {
+          const attrName = attr.attribute.name;
+          if (!attributesMap.has(attrName)) {
+            attributesMap.set(attrName, new Set());
+          }
+          attr.values.forEach(val => attributesMap.get(attrName).add(val.name));
+        });
+      });
+
+      attributesMap.forEach((values, name) => {
+        const label = document.createElement('label');
+        label.className = 'form-label mt-3';
+        label.textContent = name;
+
+        const select = document.createElement('select');
+        select.className = 'form-select mb-2';
+        select.dataset.attrName = name;
+        select.innerHTML = `<option value="">All</option>`;
+        [...values].forEach(v => {
+          const option = document.createElement('option');
+          option.value = v;
+          option.textContent = v;
+          select.appendChild(option);
+        });
+
+        attributeFilters.appendChild(label);
+        attributeFilters.appendChild(select);
+      });
+
+      function applyFilters() {
+        let filtered = [...products];
+
+        const selectedCat = categorySelect.value;
+        const maxPrice = parseFloat(priceInput.value);
+        const attrSelects = attributeFilters.querySelectorAll('select');
+
+        if (selectedCat) {
+          filtered = filtered.filter(p => p.category?.name === selectedCat);
+        }
+        if (!isNaN(maxPrice)) {
+          filtered = filtered.filter(p => {
+            const price = p.pricing?.priceRange?.start?.gross?.amount;
+            return price !== undefined && price <= maxPrice;
+          });
+        }
+        attrSelects.forEach(sel => {
+          const val = sel.value;
+          const name = sel.dataset.attrName;
+          if (val) {
+            filtered = filtered.filter(p =>
+              p.attributes.some(attr => attr.attribute.name === name &&
+                attr.values.some(v => v.name === val))
+            );
+          }
+        });
+
+        renderProducts(filtered);
+      }
+
+      categorySelect.addEventListener('change', applyFilters);
+      priceInput.addEventListener('input', applyFilters);
+      attributeFilters.addEventListener('change', applyFilters);
+    }
+
+    async function init() {
+      const products = await fetchProducts();
+      renderProducts(products);
+      setupFilters(products);
+    }
+
+    init();
+  </script>
+
+</body>
+
+
+    <footer class="footer">
+        <!-- Start Footer Top -->
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-12">
+                        <!-- Single Widget -->
+                        <div class="single-footer f-about">
+                            <div class="logo">
+                                <a href="index.html">
+                                    <img src="assets/images/logo/logo.png" alt="#">
+                                </a>
+                            </div>
+                            <p>Making the world a better place through constructing elegant hierarchies.</p>
+                            <ul class="social">
+                                <li><a href="coming-soon.html"><i class="lni lni-facebook-filled"></i></a></li>
+                                <li><a href="coming-soon.html"><i class="lni lni-twitter-original"></i></a></li>
+                                <li><a href="coming-soon.html"><i class="lni lni-instagram"></i></a></li>
+                                <li><a href="coming-soon.html"><i class="lni lni-linkedin-original"></i></a></li>
+                                <li><a href="coming-soon.html"><i class="lni lni-youtube"></i></a></li>
+                                <li><a href="coming-soon.html"><i class="lni lni-pinterest"></i></a></li>
+                            </ul>
+                            <p class="copyright-text">© 2025 Meatify Fresh Foods. All rights reserved. 
+                                   
+                            </p>
+                        </div>
+                        <!-- End Single Widget -->
+                    </div>
+                    <div class="col-lg-8 col-md-8 col-12">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <!-- Single Widget -->
+                                <div class="single-footer f-link">
+                                    <h3>Solutions</h3>
+                                    <ul>
+                                        <li><a href="coming-soon.html">Marketing</a></li>
+                                        <li><a href="coming-soon.html">Analytics</a></li>
+                                        <li><a href="coming-soon.html">Commerce</a></li>
+                                        <li><a href="coming-soon.html">Insights</a></li>
+                                        <li><a href="coming-soon.html">Promotion</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Single Widget -->
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <!-- Single Widget -->
+                                <div class="single-footer f-link">
+                                    <h3>Support</h3>
+                                    <ul>
+                                        <li><a href="coming-soon.html">Pricing</a></li>
+                                        <li><a href="coming-soon.html">Documentation</a></li>
+                                        <li><a href="coming-soon.html">Guides</a></li>
+                                        <li><a href="coming-soon.html">API Status</a></li>
+                                        <li><a href="coming-soon.html">Live Support</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Single Widget -->
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <!-- Single Widget -->
+                                <div class="single-footer f-link">
+                                    <h3>Company</h3>
+                                    <ul>
+                                        <li><a href="coming-soon.html">About Us</a></li>
+                                        <li><a href="coming-soon.html">Our Blog</a></li>
+                                        <li><a href="coming-soon.html">Jobs</a></li>
+                                        <li><a href="coming-soon.html">Press</a></li>
+                                        <li><a href="coming-soon.html">Contact Us</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Single Widget -->
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-12">
+                                <!-- Single Widget -->
+                                <div class="single-footer f-link">
+                                    <h3>Legal</h3>
+                                    <ul>
+                                        <li><a href="coming-soon.html">Terms & Conditions</a></li>
+                                        <li><a href="coming-soon.html">Privacy Policy</a></li>
+                                        <li><a href="coming-soon.html">Catering Services</a></li>
+                                        <li><a href="coming-soon.html">Customer Relations</a></li>
+                                        <li><a href="coming-soon.html">Innovation</a></li>
+                                    </ul>
+                                </div>
+                                <!-- End Single Widget -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ End Footer Top -->
+    </footer>
+</html>
