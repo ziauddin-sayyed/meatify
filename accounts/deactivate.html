@@ -110,67 +110,270 @@
         font-weight: bold;
     }
 </style>
-<body class="container py-5">
+<body>
+    <!--[if lte IE 9]>
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
+        your experience and security.
+      </p>
+    <![endif]-->
 
-  <h2 class="mb-4">Request Account Deletion</h2>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-icon">
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- /End Preloader -->
 
-  <div class="mb-3">
-    <label for="redirectUrl" class="form-label">Redirect URL</label>
-    <input type="text" class="form-control" id="redirectUrl" placeholder="https://your-app.com/confirm-delete/">
+    <!-- Start Header Area -->
+    <header class="header navbar-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="nav-inner">
+                        <!-- Start Navbar -->
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="assets/images/logo/logo.png" height="100" style="width: 100%  !important;"
+                                    alt="Logo">
+                            </a>
+                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ms-auto">
+                                    <li class="nav-item">
+                                        <a href="index.html" class=" active" aria-label="Toggle navigation">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="About-Us.html" class="" aria-label="Toggle navigation">About Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="shipping-and-delivery.html" aria-label="Toggle navigation">Shipping &
+                                            Delivery</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="products.html" class=""
+                                            aria-label="Toggle navigation">Products</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="contact-us.html" aria-label="Toggle navigation">Contact Us</a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                      <a class="dd-menu collapsed" href="coming-soon.html" data-bs-toggle="collapse"
+                                          data-bs-target="#submenu-1-4" aria-controls="navbarSupportedContent"
+                                          aria-expanded="false" aria-label="Toggle navigation">Blog</a>
+                                      <ul class="sub-menu collapse" id="submenu-1-4">
+                                          <li class="nav-item"><a href="coming-soon.html">Blog Grid Sidebar</a>
+                                          </li>
+                                          <li class="nav-item"><a href="coming-soon.html">Blog Single</a></li>
+                                          <li class="nav-item"><a href="coming-soon.html">Blog Single
+                                                  Sibebar</a></li>
+                                      </ul>
+                                  </li> -->
+
+                                </ul>
+                            </div> <!-- navbar collapse -->
+                            <div class="button add-list-button">
+                                <a href="coming-soon.html" class="btn">Get it now</a>
+                            </div>
+                        </nav>
+                        <!-- End Navbar -->
+                    </div>
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </header> 
+    <!-- End Header Area -->
+
+
+<section>
+
+   <h2 class="section-title">Best Sellers</h2>
+        <div class="products-container">
+            <!-- Product 1 -->
+            <div class="product-card">
+                
+                <img src="./assets/images/Chicken Breast Boneless.jpg" alt="Product 1" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Chicken Breast Boneless</h3>
+                    <p class="">Tender boneless chicken breast 🍗 perfect for salads 🥗, stir-fries 🍳, or grilled dishes 🔥. High in protein 💪, low in fat 🥄, and easy to cook ⏱️ — great for fitness-focused meals 🏋️.</p>
+
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                
+                <img src="./assets/images/Goat_Curry_cut.png" alt="Product 2" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Goat Curry cut</h3>
+                    <p class="">Bone-in goat meat 🐐 for authentic spicy curries 🍛 and pressure-cooked stews ♨️. Tender and flavorful 🍖 — cook with bold spices 🌶️ for traditional meals 🍽️ your family will love 💕</p>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                
+                <img src="./assets/images/Chicken_Curry_Cut.png" alt="Product 3" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Chicken Curry Cut Skinless
+                    </h3>
+                    <p class="">Curry-ready skinless chicken pieces 🍗 ideal for traditional Indian curries 🍛, biryanis 🍚, or stews 🍲. Clean and quick-cooking 🔥 — just add spices 🌶️ for a hearty meal 🥘.</p>
+
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                
+                <img src="./assets/images/Premium_Goat_Keema.jpg" alt="Product 4" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Premium Goat Mince / Keema
+                    </h3>
+                    <p class="">Finely ground goat meat 🐐 for kheema 🍳, patties 🍔, or spicy stuffed dishes 🌶️. High-quality mince for flavorful meals 🍛, perfect for quick cooking 🔥 and bold flavors 🧄.</p>
+
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card">
+                
+                <img src="./assets/images/chicken_kheema.png" alt="Product 4" class="product-image">
+                <div class="product-info">
+                    <h3 class="product-name">Chicken Kheema
+                    </h3>
+                    <p class="">Freshly minced chicken  ideal for making spicy keema curry, stuffed parathas, or savory samosas. Quick to cook  and rich in protein  — a versatile pick for everyday meals.</p>
+
+                </div>
+            </div>
+        </div>
+    </section> 
+
+
+<!-- Start Call To Action Area -->
+<section class="section call-action">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 col-md-12 col-12">
+                <div class="cta-content">
+                    <h2 class="wow fadeInUp" data-wow-delay=".2s">Get Fresh Meat Delivered Today!</h2>
+                    <p class="wow fadeInUp" data-wow-delay=".4s">Download the Meatify app and place your order in seconds. Fresh meat delivered fast to your doorstep!</p>
+                    <div class="button wow fadeInUp" data-wow-delay=".6s">
+                        <a href="coming-soon.html" class="btn">Download the App</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+</section>
+<!-- End Call To Action Area -->
+
+    <!-- End Call To Action Area -->
+
+    <!-- Start Footer Area -->
+<footer class="footer">
+  <!-- Start Footer Top -->
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-4 col-12">
+          <!-- Single Widget -->
+          <div class="single-footer f-about">
+            <div class="logo">
+              <a href="index.html">
+                <img src="assets/images/logo/logo.png" alt="#">
+              </a>
+            </div>
+            <p>Making the world a better place through constructing elegant hierarchies.</p>
+            <ul class="social">
+              <li><a href="coming-soon.html"><i class="lni lni-facebook-filled"></i></a></li>
+              <li><a href="coming-soon.html"><i class="lni lni-twitter-original"></i></a></li>
+              <li><a href="coming-soon.html"><i class="lni lni-instagram"></i></a></li>
+              <li><a href="coming-soon.html"><i class="lni lni-linkedin-original"></i></a></li>
+              <li><a href="coming-soon.html"><i class="lni lni-youtube"></i></a></li>
+              <li><a href="coming-soon.html"><i class="lni lni-pinterest"></i></a></li>
+            </ul>
+            <p class="copyright-text">© 2025 Meatify Fresh Foods. All rights reserved.
+                
+            </p>
+          </div>
+          <!-- End Single Widget -->
+        </div>
+        <div class="col-lg-8 col-md-8 col-12">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-12">
+              <!-- Single Widget -->
+              <div class="single-footer f-link">
+                <h3>Company</h3>
+                <ul>
+                  <li><a href="coming-soon.html">About Us</a></li>
+                  <li><a href="coming-soon.html">Our Blog</a></li>
+                  <li><a href="coming-soon.html">Jobs</a></li>
+                  <li><a href="coming-soon.html">Press</a></li>
+                  <li><a href="https://meatify.in/contact-us.html">Contact Us</a></li>
+                </ul>
+              </div>
+              <!-- End Single Widget -->
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+              <!-- Single Widget -->
+              <div class="single-footer f-link">
+                <h3>Legal</h3>
+                <ul>
+                  <li><a href="https://meatify.in/terms-and-conditions.html">Terms & Conditions</a></li>
+                  <li><a href="https://meatify.in/privacy-policy.html">Privacy Policy</a></li>
+                  <li><a href="coming-soon.html">Catering Services</a></li>
+                  <li><a href="coming-soon.html">Customer Relations</a></li>
+                  <li><a href="coming-soon.html">Innovation</a></li>
+                </ul>
+              </div>
+              <!-- End Single Widget -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <!--/ End Footer Top -->
+</footer>
+    <!--/ End Footer Area -->
 
-  <button id="deleteBtn" class="btn btn-danger">Request Deletion</button>
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top">
+        <i class="lni lni-chevron-up"></i>
+    </a>
 
-  <div id="result" class="mt-4"></div>
+    <!-- ========================= JS here ========================= -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/tiny-slider.js"></script>
+    <script src="assets/js/glightbox.min.js"></script>
+    <script src="assets/js/count-up.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script type="text/javascript">
 
-  <script>
-    document.getElementById('deleteBtn').addEventListener('click', async () => {
-      const redirectUrl = document.getElementById('redirectUrl').value.trim();
-      const resultDiv = document.getElementById('result');
-
-      if (!redirectUrl) {
-        resultDiv.innerHTML = '<div class="alert alert-warning">Please enter a redirect URL.</div>';
-        return;
-      }
-
-      const query = `
-        mutation {
-          accountRequestDeletion(redirectUrl: "${redirectUrl}") {
-            errors {
-              field
-              message
-              code
-            }
-          }
-        }
-      `;
-
-      try {
-        const res = await fetch('https://your-saleor-domain/graphql/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer YOUR_ACCESS_TOKEN' // Replace with actual token
-          },
-          body: JSON.stringify({ query })
+        //====== counter up 
+        var cu = new counterUp({
+            start: 0,
+            duration: 2000,
+            intvalues: true,
+            interval: 100,
+            append: " ",
         });
-
-        const json = await res.json();
-        const errors = json.data?.accountRequestDeletion?.errors;
-
-        if (errors?.length) {
-          resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${errors[0].message}</div>`;
-        } else {
-          resultDiv.innerHTML = '<div class="alert alert-success">Success! Check your email to confirm deletion.</div>';
-        }
-      } catch (err) {
-        console.error(err);
-        resultDiv.innerHTML = '<div class="alert alert-danger">Something went wrong. Please try again.</div>';
-      }
-    });
-  </script>
-
+        cu.start();
+    </script>
 </body>
-
 
 </html>
