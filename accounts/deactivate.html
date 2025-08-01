@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Meatify.in - Fresh, Quality Meat Delivered Fast to Your Door.</title> 
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="SK Contractors">
+    <meta property="og:title" content="Meatify.in - Fresh Meat Delivery at Your Doorstep" />
+    <meta property="og:description" content="Meatify.in brings fresh, high-quality meat delivered straight to your door. Convenient, fast, and reliable meat delivery service for all your needs." />
+    <meta property="og:image" content="https://www.meatify.in/assets/images/logo/logo.png" />
+    <meta property="og:url" content="https://www.meatify.in" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Meatify.in" />
+    
+    <link rel="canonical" href="https://skcivil.in">
+    <link rel="icon" href="assets/images/logo/logo.png" type="image/x-icon">
+    
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/LineIcons.2.0.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <link rel="stylesheet" href="assets/css/tiny-slider.css" />
+    <link rel="stylesheet" href="assets/css/glightbox.min.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+
+</head>
+<style> 
+
+    .best-sellers {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #333;
+        position: relative;
+    }
+
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 3px;
+        background: #760000;
+        margin: 10px auto;
+    }
+
+    .products-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .product-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 250px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .product-info {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .product-name {
+        font-size: 1.1rem;
+        margin: 10px 0;
+        color: #333;
+    }
+
+    /* . {
+        font-weight: bold;
+        color: #760000;
+        margin-bottom: 15px;
+    } */
+
+    .best-seller-tag {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #760000;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+</style>
+<body class="container py-5">
+
+  <h2 class="mb-4">Request Account Deletion</h2>
+
+  <div class="mb-3">
+    <label for="redirectUrl" class="form-label">Redirect URL</label>
+    <input type="text" class="form-control" id="redirectUrl" placeholder="https://your-app.com/confirm-delete/">
+  </div>
+
+  <button id="deleteBtn" class="btn btn-danger">Request Deletion</button>
+
+  <div id="result" class="mt-4"></div>
+
+  <script>
+    document.getElementById('deleteBtn').addEventListener('click', async () => {
+      const redirectUrl = document.getElementById('redirectUrl').value.trim();
+      const resultDiv = document.getElementById('result');
+
+      if (!redirectUrl) {
+        resultDiv.innerHTML = '<div class="alert alert-warning">Please enter a redirect URL.</div>';
+        return;
+      }
+
+      const query = `
+        mutation {
+          accountRequestDeletion(redirectUrl: "${redirectUrl}") {
+            errors {
+              field
+              message
+              code
+            }
+          }
+        }
+      `;
+
+      try {
+        const res = await fetch('https://your-saleor-domain/graphql/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer YOUR_ACCESS_TOKEN' // Replace with actual token
+          },
+          body: JSON.stringify({ query })
+        });
+
+        const json = await res.json();
+        const errors = json.data?.accountRequestDeletion?.errors;
+
+        if (errors?.length) {
+          resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${errors[0].message}</div>`;
+        } else {
+          resultDiv.innerHTML = '<div class="alert alert-success">Success! Check your email to confirm deletion.</div>';
+        }
+      } catch (err) {
+        console.error(err);
+        resultDiv.innerHTML = '<div class="alert alert-danger">Something went wrong. Please try again.</div>';
+      }
+    });
+  </script>
+
+</body>
+
+
+</html>
