@@ -2199,7 +2199,8 @@ progress {
 }
 
 .form-label {
-    margin-bottom: .5rem
+    margin-bottom: .5rem;
+    color:black;
 }
 
 .col-form-label {
