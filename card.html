@@ -268,7 +268,7 @@
 
         .product-qty {
             font-size: 0.7rem;
-            font-weight: bold;
+            /* font-weight: bold; */
         }
 
         .product-price {
@@ -418,10 +418,10 @@
                 card.className = "product-card";
                 card.innerHTML = `
          <div class="product-name">${product.name}</div>
-         <div class="use-by">Use by: <small>${futureDateText}</small></div>
-         <div style="font-size:0.7rem;">USP: Rs ${pricePerGram.toFixed(2)}${pricePerGram > 0 ? "/g" : ""}</div>
-         ${netWeightText ? `<div class="product-qty"><span style="color:#666;">Net Weight:</span> ${netWeightText}</div>` : ""}
          <div class="product-price">MRP ₹ <span style="font-weight:bold;">${price.toFixed(2)}</span></div>
+         <div class="use-by">Use by: <small>${futureDateText}</small></div>
+         ${netWeightText ? `<div class="product-qty"><span>Net Weight:</span> <span style="font-weight:bold; font-size:14px">${netWeightText}</span></div>` : ""}
+         <div style="font-size:0.7rem;">USP: Rs ${pricePerGram.toFixed(2)}${pricePerGram > 0 ? "/g" : ""}</div>
        `;
                 grid.appendChild(card);
             });
