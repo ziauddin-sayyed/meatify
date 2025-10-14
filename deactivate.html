@@ -131,58 +131,48 @@
   <h2 class="mb-4">Request Account Deletion</h2>
 
   <div class="mb-3">
-    <label for="redirectUrl" class="form-label">Please put email or phone number</label>
-    <input type="text" class="form-control" id="redirectUrl" placeholder="Email or Phone number">
+    <label for="redirectUrl" class="form-label">Please put email to dectivate your account.</label>
+    <input type="text" class="form-control" id="email" placeholder="Email">
   </div>
-
+<!-- sayyedqatar5@gmail.com -->
   <button id="deleteBtn" class="btn btn-danger">Request Deletion</button>
 
   <div id="result" class="mt-4"></div>
 
   <script>
-    document.getElementById('deleteBtn').addEventListener('click', async () => {
-      const redirectUrl = document.getElementById('redirectUrl').value.trim();
-      const resultDiv = document.getElementById('result');
+        const submitButton = document.getElementById('deleteBtn');
+    document.getElementById('deleteBtn').addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent default form submission
 
-      if (!redirectUrl) {
-        resultDiv.innerHTML = '<div class="alert alert-warning">Please enter a redirect URL.</div>';
-        return;
-      }
+      const email = document.getElementById('email').value;
 
-      const query = `
-        mutation {
-          accountRequestDeletion(redirectUrl: "${redirectUrl}") {
-            errors {
-              field
-              message
-              code
-            }
-          }
+      console.log(email);
+      submitButton.disabled = true;
+      submitButton.textContent = 'Please wait...';      
+
+      fetch('https://api.meatify.in/request/delete-account/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Request failed: ' + response.status);
         }
-      `;
-
-      try {
-        const res = await fetch('https://your-saleor-domain/graphql/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer YOUR_ACCESS_TOKEN' // Replace with actual token
-          },
-          body: JSON.stringify({ query })
-        });
-
-        const json = await res.json();
-        const errors = json.data?.accountRequestDeletion?.errors;
-
-        if (errors?.length) {
-          resultDiv.innerHTML = `<div class="alert alert-danger">Error: ${errors[0].message}</div>`;
-        } else {
-          resultDiv.innerHTML = '<div class="alert alert-success">Success! Check your email to confirm deletion.</div>';
+        if (response.ok) {
+          alert("We received your request, thanks");
+          location.reload();
         }
-      } catch (err) {
-        console.error(err);
-        resultDiv.innerHTML = '<div class="alert alert-danger">Something went wrong. Please try again.</div>';
-      }
+        return response.json(); // Adjust if your Django view returns plain text
+      })
+      .then(data => {
+        document.getElementById('response').textContent = 'Success: ' + JSON.stringify(data);
+      })
+      .catch(error => {
+        document.getElementById('response').textContent = 'Error: ' + error.message;
+      });
     });
   </script>
 
@@ -265,6 +255,6 @@
 <script src="assets/js/tiny-slider.js"></script>
 <script src="assets/js/glightbox.min.js"></script>
 <script src="assets/js/count-up.min.js"></script>
-<script src="assets/js/main.js"></script>
+<!-- <script src="assets/js/main.js"></script> -->
 </body>
 </html>
