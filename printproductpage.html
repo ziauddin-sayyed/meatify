@@ -204,7 +204,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Printable Product Label</title>
-    <style>
+    <!-- <style>
         body {
             font-family: Arial, sans-serif;
             background: #fff;
@@ -269,6 +269,109 @@
                 size: 55mm 33mm;
                 margin: 0;
             }
+        }
+    </style> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .category-section {
+            margin-bottom: 2rem;
+        }
+    
+        .category-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            display: inline-block;
+            padding-bottom: 2px;
+        }
+    
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    
+        .product-card {
+            width: 50mm;
+            height: 30mm;
+            padding: 6px 8px;
+            margin: 6px;
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #fff;
+            box-sizing: border-box;
+        }
+    
+        .product-name {
+            font-weight: 600;
+            color: #222;
+        }
+    
+        .product-qty {
+            font-size: 0.7rem;
+            /* font-weight: bold; */
+        }
+    
+        .product-price {
+            color: #000;
+        }
+    
+        .use-by {
+            font-size: 0.7rem;
+        }
+    
+        .use-by small {
+            /* color: #e63946; */
+            font-weight: 600;
+        }
+    
+        /* ✅ PRINT MODE — one product per page, centered */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background: #fff;
+            }
+    
+            .category-section,
+            .category-title {
+                display: none;
+                /* Hide headings during print */
+            }
+    
+            .product-grid {
+                display: block;
+            }
+    
+            .product-card {
+                page-break-after: always;
+                width: 55mm;
+                height: 33mm;
+                display: flex;
+                margin-left: 3mm;
+                margin-top: 0mm;
+                transform: none;
+                box-sizing: border-box;
+                position: relative;
+            }
+    
+            /* 🧭 Perfect centering on page */
+            @page {
+                size: 55mm 33mm;
+                margin: 0;
+            }
+    
+    
         }
     </style>
 </head>
