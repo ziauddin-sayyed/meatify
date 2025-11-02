@@ -178,14 +178,21 @@
             });
 
             container.innerHTML = `
-        <div class="card">
-          <div class="product-name">${product.name}</div>
-          <div class="product-price">MRP ₹ <strong>${price.toFixed(2)}</strong></div>
-          <div class="use-by">Use by: <small>${futureDateText}</small></div>
-          ${netWeight ? `<div class="product-qty"><span>Net Weight:</span> <strong>${netWeight}</strong></div>` : ""}
-          <div style="font-size:0.8rem;">USP: ₹${pricePerGram.toFixed(2)}${pricePerGram > 0 ? "/g" : ""}</div>
-        </div>
+         <div class="product-name">${product.name}</div>
+         <div class="product-price">MRP ₹ <span style="font-weight:bold;">${price.toFixed(2)}</span></div>
+         <div class="use-by">Use by: <small>${futureDateText}</small></div>
+         ${netWeight ? `<div class="product-qty"><span>Net Weight:</span> <span style="font-weight:bold; font-size:14px">${netWeight}</span></div>` : ""}
+         <div style="font-size:0.7rem;">USP: Rs ${pricePerGram.toFixed(2)}${pricePerGram > 0 ? "/g" : ""}</div>
       `;
+    //         container.innerHTML = `
+    //     <div class="card">
+    //       <div class="product-name">${product.name}</div>
+    //       <div class="product-price">MRP ₹ <strong>${price.toFixed(2)}</strong></div>
+    //       <div class="use-by">Use by: <small>${futureDateText}</small></div>
+    //       ${netWeight ? `<div class="product-qty"><span>Net Weight:</span> <strong>${netWeight}</strong></div>` : ""}
+    //       <div style="font-size:0.8rem;">USP: ₹${pricePerGram.toFixed(2)}${pricePerGram > 0 ? "/g" : ""}</div>
+    //     </div>
+    //   `;
         }
 
         renderProduct();
