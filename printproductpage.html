@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Details</title>
+    <title>Printable Product Label</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,9 +76,6 @@
                 padding: 0;
                 background: #fff;
             }
-            .back{
-                display: none;
-            }
     
             .category-section,
             .category-title {
@@ -114,52 +111,44 @@
 </head>
 
 <body>
-    <a href="printproduct.html" class="back">← Back to products</a>
-    <div id="productDetails">Loading...</div>
+    <div id="productContainer">Loading product...</div>
 
     <script>
         const graphqlEndpoint = 'https://api.meatify.in/graphql/';
-        const urlParams = new URLSearchParams(window.location.search);
-        const slug = urlParams.get("slug");
 
-        const productQuery = `
-      query GetProduct($slug: String!) {
-        product(channel: "in", slug: $slug) {
-          id
-          name
-          slug
-          description
-          category { name }
-          attributes { attribute { name slug } values { name } }
-          variants {
+        const query = `
+    query GetProduct {
+      products(first: 1, channel: "in") {
+        edges {
+          node {
+            id
             name
+            description
+            category { name }
             attributes { attribute { name slug } values { name } }
-          }
-          pricing {
-            priceRange { start { gross { amount currency } } }
+            variants {
+              name
+              attributes { attribute { name slug } values { name } }
+            }
+            pricing { priceRange { start { gross { amount currency } } } }
           }
         }
       }
-    `;
+    }`;
 
         async function fetchProduct() {
             const res = await fetch(graphqlEndpoint, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ query: productQuery, variables: { slug } }),
+                body: JSON.stringify({ query }),
             });
             const json = await res.json();
-            return json.data.product;
+            return json.data.products.edges[0].node;
         }
 
-        async function renderProduct() {
-            const product = await fetchProduct();
-            const container = document.getElementById("productDetails");
-
-            if (!product) {
-                container.innerHTML = "<p>Product not found.</p>";
-                return;
-            }
+        function renderProduct(product) {
+            const container = document.getElementById("productContainer");
+            container.innerHTML = "";
 
             const price = product.pricing?.priceRange?.start?.gross?.amount || 0;
             const variant = product.variants?.[0];
@@ -168,36 +157,40 @@
                 variant?.attributes?.find((a) => a.attribute.slug === "net-weight")?.values?.[0]?.name ||
                 "";
 
-            const numericWeight = parseFloat(netWeight.replace(/[^\d.]/g, "")) || 0;
-            const pricePerGram = numericWeight > 0 ? price / numericWeight : 0;
+            const netWeightText = netWeight || "";
+            const numericWeight = parseFloat(netWeightText.replace(/[^\d.]/g, "")) || 0;
 
+            let pricePerGram = 0;
+            if (numericWeight > 0 && price > 0) {
+                pricePerGram = price / numericWeight;
+            }
+
+            // ✅ Future date (2 days ahead, IST)
             const today = new Date();
             today.setDate(today.getDate() + 2);
-            const futureDateText = today.toLocaleDateString('en-IN', {
-                day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata'
-            });
+            const options = { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' };
+            const futureDateText = today.toLocaleDateString('en-IN', options);
 
-            container.innerHTML = `
-            <div class="product-card">
-         <div class="product-name">${product.name}</div>
-         <div class="product-price">MRP ₹ <span style="font-weight:bold;">${price.toFixed(2)}</span></div>
-         <div class="use-by">Use by: <small>${futureDateText}</small></div>
-         ${netWeight ? `<div class="product-qty"><span>Net Weight:</span> <span style="font-weight:bold; font-size:14px">${netWeight}</span></div>` : ""}
-         <div style="font-size:0.7rem;">USP: Rs ${pricePerGram.toFixed(2)}${pricePerGram > 0 ? "/g" : ""}</div>
-     </div>
-         `;
-    //         container.innerHTML = `
-    //     <div class="card">
-    //       <div class="product-name">${product.name}</div>
-    //       <div class="product-price">MRP ₹ <strong>${price.toFixed(2)}</strong></div>
-    //       <div class="use-by">Use by: <small>${futureDateText}</small></div>
-    //       ${netWeight ? `<div class="product-qty"><span>Net Weight:</span> <strong>${netWeight}</strong></div>` : ""}
-    //       <div style="font-size:0.8rem;">USP: ₹${pricePerGram.toFixed(2)}${pricePerGram > 0 ? "/g" : ""}</div>
-    //     </div>
-    //   `;
+            // ✅ Create product card (SINGLE)
+            const card = document.createElement("div");
+            card.className = "product-card";
+            card.innerHTML = `
+        <div class="product-name">${product.name}</div>
+        <div class="product-price">MRP ₹ <span style="font-weight:bold;">${price.toFixed(2)}</span></div>
+        <div class="use-by">Use by: <small>${futureDateText}</small></div>
+        ${netWeightText ? `<div class="product-qty"><span>Net Weight:</span> <span style="font-weight:bold; font-size:14px">${netWeightText}</span></div>` : ""}
+        <div style="font-size:0.7rem;">USP: Rs ${pricePerGram.toFixed(2)}${pricePerGram > 0 ? "/g" : ""}</div>
+      `;
+
+            container.appendChild(card);
         }
 
-        renderProduct();
+        async function init() {
+            const product = await fetchProduct();
+            renderProduct(product);
+        }
+
+        init();
     </script>
 </body>
 
