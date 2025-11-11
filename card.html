@@ -1,215 +1,3 @@
-<!-- <style>
-    .category-section {
-        margin-bottom: 2rem;
-    }
-
-    .category-title {
-        font-weight: bold;
-        font-size: 1.2rem;
-        margin-bottom: 0.8rem;
-        color: #333;
-        border-bottom: 2px solid #ddd;
-        display: inline-block;
-        padding-bottom: 2px;
-    }
-
-    .product-card {
-        width: 5cm;
-        height: 3cm;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        padding: 6px 8px;
-        margin: 6px;
-        font-size: 0.85rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        /* background: #fafafa; */
-    }
-
-    .product-grid {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .product-name {
-        font-weight: 600;
-        color: #222;
-    }
-
-    .product-desc {
-        color: #666;
-        font-size: 0.75rem;
-        margin: 2px 0;
-    }
-
-    .product-qty {
-        /* color: #777; */
-        font-size: 0.7rem;
-        font-weight: bold;
-
-    }
-
-    .product-price {
-        /* font-weight: bold; */
-        /* font-size: 0.7rem; */
-
-        color: #000;
-    }
-</style>
-
-<div id="productGrid"></div>
-
-<script>
-    const graphqlEndpoint = 'https://api.meatify.in/graphql/'; // Replace with your Saleor instance
-
-
-    const query = `
-    query GetProducts {
-      products(first: 100, channel: "in") {
-        edges {
-          node {
-            id
-            name
-            slug
-            description
-            category {
-              name
-            }
-            attributes {
-              attribute { name slug }
-              values { name }
-            }
-            variants {
-              name
-              attributes {
-                attribute { name slug }
-                values { name }
-              }
-            }
-            pricing {
-              priceRange {
-                start { gross { amount currency } }
-              }
-            }
-          }
-        }
-      }
-    }`;
-
-    async function fetchProducts() {
-        const res = await fetch(graphqlEndpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ query }),
-        });
-        const json = await res.json();
-        return json.data.products.edges.map((e) => e.node);
-    }
-
-    function renderProducts(products) {
-        const grid = document.getElementById("productGrid");
-        grid.innerHTML = "";
-
-        // Group by category
-        const grouped = {};
-        products.forEach((p) => {
-            const cat = p.category?.name || "Uncategorized";
-            if (!grouped[cat]) grouped[cat] = [];
-            grouped[cat].push(p);
-        });
-
-        for (const [category, items] of Object.entries(grouped)) {
-            const section = document.createElement("div");
-            section.className = "category-section";
-
-            const heading = document.createElement("div");
-            heading.className = "category-title";
-            heading.textContent = category;
-            section.appendChild(heading);
-
-            const container = document.createElement("div");
-            container.className = "product-grid";
-
-            items.forEach((product) => {
-                const price =
-                    product.pricing?.priceRange?.start?.gross?.amount?.toFixed(2) || "N/A";
-                const currency =
-                    product.pricing?.priceRange?.start?.gross?.currency || "";
-
-                const variant = product.variants?.[0];
-                const variantName = variant?.name || "";
-                const netWeight =
-                    product.attributes?.find(
-                        (attr) => attr.attribute.slug === "net-weight"
-                    )?.values?.[0]?.name ||
-                    variant?.attributes?.find(
-                        (attr) => attr.attribute.slug === "net-weight"
-                    )?.values?.[0]?.name ||
-                    "";
-
-                // const quantityLabel = variantName || netWeight || "";
-                const quantityLabel =   netWeight || "";
-                
-              // Set Indian date for all product cards
-                const allDates = document.querySelectorAll('.todayDate');
-                const today = new Date();
-                const options = { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Kolkata' };
-                const todayText = today.toLocaleDateString('en-IN', options);
-
-                allDates.forEach(el => el.textContent = todayText);
-
-                const desc =
-                    (() => {
-                        try {
-                            return JSON.parse(product.description)?.blocks?.[0]?.data?.text;
-                        } catch {
-                            return product.description || "";
-                        }
-                    })() || "";
-                // const price = product.pricing?.priceRange?.start?.gross?.amount || 0;
-                const netWeightText = quantityLabel || ""; // e.g. "1000 gram", "1 kg", etc.
-
-                // Extract numeric value only (like 1000 from "1000 gram")
-                const numericWeight = parseFloat(netWeightText.replace(/[^\d.]/g, "")) || 0;
-
-                let pricePerGram = 0;
-
-                // ✅ Only divide when both are > 0
-                if (numericWeight > 0 && price > 0) {
-                    pricePerGram = price / numericWeight;
-                }
-                const card = document.createElement("div");
-                card.className = "product-card";
-                // <div class="product-price">₹${pricePerGram.toFixed(2)} / gram</div>
-                card.innerHTML = `
-            <div class="product-name">${product.name}</div> 
-            <div style="font-size: 0.7rem;">Use by:<small><span class="todayDate"></span></small> </div>  
-            <div style="font-size: 0.7rem;">USP: Rs ${pricePerGram.toFixed(2)}/g</div>
-
-            ${quantityLabel
-                        ? `<div class="product-qty"><span style="color: #666;">Net Weight:</span> ${quantityLabel}</div>`
-                        : ""
-                    }
-            <div class="product-price">MRP  ₹ <span style="font-weight: bold;">${price}</span></div>
-          `;
-                container.appendChild(card);
-            });
-
-            section.appendChild(container);
-            grid.appendChild(section);
-        }
-    }
-
-    async function init() {
-        const products = await fetchProducts();
-        renderProducts(products);
-    }
-
-    init();
-</script>
-   -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -218,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Printable Product Labels</title>
 
-    <style>
+    <!-- <style>
         body {
             font-family: Arial, sans-serif;
             background: #fff;
@@ -247,8 +35,8 @@
         }
 
         .product-card {
-            width: 5cm;
-            height: 3cm;
+            width: 50mm;
+            height: 30mm;
             border: 1px solid #999;
             border-radius: 6px;
             padding: 6px 8px;
@@ -304,8 +92,8 @@
 
             .product-card {
                 page-break-after: always;
-                width: 7cm;
-                height: 7cm;
+                width: 50mm;
+                height: 30mm;
                 border: 1px solid #000;
                 display: flex;
                 align-items: center;
@@ -333,6 +121,110 @@
                 display: block !important;
                 visibility: visible !important;
             }
+        }
+    </style> -->
+   <!-- new style for printing -->
+   <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .category-section {
+            margin-bottom: 2rem;
+        }
+    
+        .category-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+            border-bottom: 2px solid #ddd;
+            display: inline-block;
+            padding-bottom: 2px;
+        }
+    
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    
+        .product-card {
+            width: 50mm;
+            height: 30mm;
+            padding: 6px 8px;
+            margin: 6px;
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #fff;
+            box-sizing: border-box;
+        }
+    
+        .product-name {
+            font-weight: 600;
+            color: #222;
+        }
+    
+        .product-qty {
+            font-size: 0.7rem;
+            /* font-weight: bold; */
+        }
+    
+        .product-price {
+            color: #000;
+        }
+    
+        .use-by {
+            font-size: 0.7rem;
+        }
+    
+        .use-by small {
+            /* color: #e63946; */
+            font-weight: 600;
+        }
+    
+        /* ✅ PRINT MODE — one product per page, centered */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background: #fff;
+            }
+    
+            .category-section,
+            .category-title {
+                display: none;
+                /* Hide headings during print */
+            }
+    
+            .product-grid {
+                display: block;
+            }
+    
+            .product-card {
+                page-break-after: always;
+                width: 55mm;
+                height: 33mm;
+                display: flex;
+                margin-left: 3mm;
+                margin-top: 0mm;
+                transform: none;
+                box-sizing: border-box;
+                position: relative;
+            }
+    
+            /* 🧭 Perfect centering on page */
+            @page {
+                size: 55mm 33mm;
+                margin: 0;
+            }
+    
+    
         }
     </style>
 </head>
