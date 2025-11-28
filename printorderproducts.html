@@ -224,7 +224,7 @@
                     card.innerHTML = `
                         <div class="product-name">${order_id+order.number}</div>
                         <div class="product-name">${product.name}</div>
-                        <div class="product-price">MRP ₹<span style="text-decoration: line-through;"> <span style="font-weight:bold;">${savingAmount} </span> </span> ${price.toFixed(2)}</div>
+                        <div class="product-price">MRP ₹<span style="text-decoration: line-through;">${savingAmount} </span>&nbsp; <span style="font-weight:bold;">${price.toFixed(2)} </span> </div>
                         <div class="use-by">Use by: <small>${futureDateText}</small></div>
                         ${netWeightText ? `<div class="product-qty"><span>Net Weight:</span> <span style="font-weight:bold; font-size:14px">${netWeightText}</span></div>` : ""}
                         <div style="font-size:0.7rem;">USP: Rs ${pricePerGram.toFixed(2)}${pricePerGram > 0 ? "/g" : ""}</div>
