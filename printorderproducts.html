@@ -250,7 +250,18 @@
                         renderProduct(product);
                     }
                 });
+                const encoded = base32.encode(order.number);
+                const order_id = encoded.replace(/=+$/, "");        
 
+                const card = document.createElement("div");
+                card.className = "product-card";
+                card.innerHTML = `
+                        <div class="product-name">${order_id+order.number}</div>
+                        <div class="product-name">${order.billingAddress.firstName +" "+order.billingAddress.lastName}</div>
+                        <div class="product-name">${order.billingAddress.streetAddress1 +" "+order.billingAddress.streetAddress2}</div>
+                        <div class="product-name">${order.billingAddress.postalCode}</div>
+                `;       
+                container.appendChild(card);
 
             });
 
