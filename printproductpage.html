@@ -427,6 +427,7 @@
                     product.attributes?.find((a) => a.attribute.slug === "net-weight")?.values?.[0]?.name ||
                     variant?.attributes?.find((a) => a.attribute.slug === "net-weight")?.values?.[0]?.name ||
                     "";
+                const savingAmount = variant?.attributes?.find((a) => a.attribute.slug === "saving-amount")?.values[0]?.name || "";
 
                 const netWeightText = netWeight || "";
                 const numericWeight = parseFloat(netWeightText.replace(/[^\d.]/g, "")) || 0;
@@ -443,6 +444,11 @@
                 card.innerHTML = `
          <div class="product-name">${product.name}</div>
          <div class="product-price">MRP ₹ <span style="font-weight:bold;">${price.toFixed(2)}</span></div>
+         <div class="product-price">
+    <span>MRP:</span>
+    ${savingAmount ? `<span style="text-decoration: line-through;">${savingAmount}</span>` : ""}
+    <strong>₹${price.toFixed(2)}</strong>
+  </div>
          <div class="use-by">Use by: <small>${futureDateText}</small></div>
          ${netWeightText ? `<div class="product-qty"><span>Net Weight:</span> <span style="font-weight:bold; font-size:14px">${netWeightText}</span></div>` : ""}
          <div style="font-size:0.7rem;">USP: Rs ${pricePerGram.toFixed(2)}${pricePerGram > 0 ? "/g" : ""}</div>
