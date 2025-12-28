@@ -113,6 +113,8 @@
                 const numericWeight = parseFloat(netWeight.replace(/[^\d.]/g, "")) || 0;
                 const pricePerGram = numericWeight > 0 ? price / numericWeight : 0;
 
+const savingAmount = variant?.attributes?.find((a) => a.attribute.slug === "saving-amount")?.values[0]?.name || "";
+// console.log(savingAmount);
                 const today = new Date();
                 today.setDate(today.getDate() + 2);
                 const futureDateText = today.toLocaleDateString('en-IN', {
@@ -123,10 +125,16 @@
                 card.className = "product-card";
                 card.innerHTML = `
           <div class="product-name"><strong>${product.name}</strong></div>
-          <div class="product-price">MRP ₹ <strong>${price.toFixed(2)}</strong></div>
+          <div class="product-price">
+    <span>MRP:</span>
+    ${savingAmount ? `<span style="text-decoration: line-through;">${savingAmount}</span>` : ""}
+    <strong>₹${price.toFixed(2)}</strong>
+  </div>
           ${netWeight ? `<div class="product-qty">Net Weight: <strong>${netWeight}</strong></div>` : ""}
           <div>Use by: <small>${futureDateText}</small></div>
           <div style="font-size:0.8rem;">USP: ₹${pricePerGram.toFixed(2)}${pricePerGram > 0 ? "/g" : ""}</div>
+          <div style="font-size:0.8rem;"></div>
+
         `;
 
                 // ✅ On click, go to single product page
